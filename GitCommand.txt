@@ -1,0 +1,94 @@
+Git command:
+1. git add *.txt.  //文件添加到 stage缓存区
+   2. git commit -m “commit desc” //提交到版本库
+   3. git status.     查看当前修改情况
+   4. git diff  *.txt. 查看具体修改内容
+   5.  git log. 查看历史修改内容 可加—pretty=oneline参数
+         git log —graph可查看分支合并图
+         Git log —pretty==oneline —abbrev-commit显示一行       commitId
+   6.  Git reset —hard HEAD^回到某个head版本
+        命令git reset HEAD <file>可以把暂存区的修改撤销掉  （unstage），重新放回工作区
+   7.  git reflog .记录操作命令
+   8.  git checkout — x.txt 把工作区的修改全部撤销回到最近一次的git commit或git add时的状态。 
+   9.  删除文件 本地rm *.txt然后git rm *.txt再commit
+ 
+1. git remote add origin git@server-name:path/repo-name.git . 关联远程库
+   2. git push -u origin master关联后第一次推送master分支的所有内容
+   3.git push origin master推送最新修改
+   4.git clone git@120.55.85.26:server/crm.git 克隆远程库到本地
+Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
+
+  
+分枝提交
+1.git checkout -b dev. 创建并切到分支dev上
+  = git branch dev; git checkout dev.
+2.git branch . 查看所有分支
+3.git checkout master;  
+    git merge dev将dev分支提交到Master上
+    加上—no-ff参数可以用普通模式合并，合并后会有历史分支
+git merge --no-ff -m "merged bug fix 101" issue-101
+4.git branch -d dev .合并分支后可删除分支
+
+着急修复Bug
+Git stash .可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作
+Git stash list .查看stash 内容
+恢复1.  git stash apply恢复，并删除stash内容git stash drop
+       2.=git stash pop
+       注：可恢复指定stash; git stash apply stash@{0}   
+
+开发新功能，可新建feature分支，若需丢弃：git branch -D feature-A
+
+
+多人协作的工作模式通常是这样：
+1. 首先，可以试图用git push origin <branch-name>推送自己的修改；
+2. 如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+3. 如果合并有冲突，则解决冲突，并在本地提交；
+4. 没有冲突或者解决掉冲突后，再用git push origin <branch-name>推送就能成功！
+如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to <branch-name> origin/<branch-name>。
+这就是多人协作的工作模式，一旦熟悉了，就非常简单。
+小结
+* 查看远程库信息，使用git remote -v；
+* 本地新建的分支如果不推送到远程，对其他人就是不可见的；
+* 从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；
+* 在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；
+* 建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
+* 从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
+
+
+ 打包版本
+Git branch; 
+Git checkout master;
+Git tag V1.0;
+或者基于历史Commit ID打版本
+Git log —pretty=oneline —abbrev-commit
+Git tag commitId
+Git tag.查看版本标签
+Git show tagName .查看具体标签信息
+推送tag
+Git push origin v1.0 .  推送1.0标签
+Giit push origin —tags .一次全部标签推送
+Git tag -d v0.1. 删除v0.1版本在本地
+Git push origin :refs/tags/v0.1
+
+
+Git常用:
+Git //查看是否安装
+ssh-keygen //产生Key
+cd /Users/kk/.ssh/   产生公钥  id_rsa		id_rsa.pub
+vim id_rsa.pub 
+git clone git@120.55.85.26:server/crm.git
+
+Git branch -a
+Git checkout -t remotes/origin/v2.7
+
+
+同步gitHub上项目到本地
+1. 新建本地项目文件夹和文件 mkdir docProj ; touch abc.txt
+2. 初始化git项目  git init; ls -a;
+3. 下载Gitbub项目 git remote add origin https://github.com/*****.git; ls -a
+4. pull下  git pull origin master; ls -a
+5. 添加本地文件到gitHub 项目: git add abc.txt; git commit -m “first commit” 
+6. 使得可见：git push —set-upstream origin master
+7. 新建分支和编辑文档： git checkout -b firstMonth;
+
+https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000

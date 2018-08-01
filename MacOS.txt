@@ -1,0 +1,33 @@
+IDEA Command:
+command+N      search file
+^space                 complete
+⌥F7                     find class
+Command+F12   navigate files’s method
+press ⇧F6 (Refactor | Rename)
+Command +B .  go to implement
+shif+control+F.  Search
+
+Mac OS Command:
+1.  Command+C/V     Copy/paste.     
+2.  Shift+Command+G 前往路径中的文件下
+    
+
+Linux :
+ls -al   //显示文件详情
+ls -ah  //显示隐藏文件
+cat a.txt. 查看内容
+ touch  a.txt .新建文件
+
+Git:
+Git //查看是否安装
+ssh-keygen //产生Key
+cd /Users/kk/.ssh/   产生公钥  id_rsa		id_rsa.pub
+vim id_rsa.pub 
+git clone git@120.55.85.26:server/crm.git
+
+Git branch -a
+Git checkout -t remotes/origin/v2.7
+
+
+
+http://localhost:8080/ppx/identityQuery
